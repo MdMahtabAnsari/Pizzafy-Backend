@@ -7,7 +7,7 @@ const userSchema = new Schema({
         lowercase: true,
         trim: true,
         required: [true, "First name is required"],
-        minlength: [5, "First name must be at least 5 characters"],
+        minlength: [3, "First name must be at least 5 characters"],
         maxlength: [20, "First name must be less than 20 characters"]
     },
     lastname: {
@@ -15,7 +15,7 @@ const userSchema = new Schema({
         trim: true,
         lowercase: true,
         required: [true, "Last name is required"],
-        minlength: [5, "Last name must be at least 5 characters"],
+        minlength: [3, "Last name must be at least 5 characters"],
         maxlength: [20, "Last name must be less than 20 characters"]
     },
     mobileNumber: {
