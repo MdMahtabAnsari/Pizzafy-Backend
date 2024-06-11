@@ -5,7 +5,6 @@ const userRouter = require('./routes/userRoute');
 const cartRouter = require('./routes/cartRoute');
 const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/authRouter');
-const isLoggedIn = require('./validation/authValidator');
 const app = express();
 // Here we are configuring express to use body-parser.
 app.use(cookieParser());
