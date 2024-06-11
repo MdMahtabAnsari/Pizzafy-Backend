@@ -1,8 +1,10 @@
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const { SALT_ROUND } = require('../config/serverConfig');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    firstname: {
+    firstName: {
         type: String,
         lowercase: true,
         trim: true,
@@ -10,7 +12,7 @@ const userSchema = new Schema({
         minlength: [3, "First name must be at least 5 characters"],
         maxlength: [20, "First name must be less than 20 characters"]
     },
-    lastname: {
+    lastName: {
         type: String,
         trim: true,
         lowercase: true,
@@ -45,6 +47,12 @@ const userSchema = new Schema({
 
 }, {
     timestamps: true,
+});
+
+userSchema.pre('save', async function () {
+    const plainPassword = this.password;
+    const hashPassword = await bcrypt.hash(plainPassword, parseInt(SALT_ROUND));
+    this.password = hashPassword;
 });
 
 const User = mongoose.model('User', userSchema);
