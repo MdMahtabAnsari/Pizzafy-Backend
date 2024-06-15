@@ -1,9 +1,9 @@
-// const UserRepository = require("../respositories/userRepository");
+const UserRepository = require("../respositories/userRepository");
 
 class UserService {
-    // #userRepository = new UserRepository(); to create private variable
-    constructor(_userRepository) {
-        this.userRepository = _userRepository;
+
+    constructor() {
+        this.userRepository = new UserRepository();
     }
     async registerUser(userDetails) {
         // It will create a brand new user in database
@@ -31,7 +31,8 @@ class UserService {
                 lastName: userDetails.lastName,
                 mobileNumber: userDetails.mobileNumber,
                 email: userDetails.email,
-                password: userDetails.password
+                password: userDetails.password,
+                userType: userDetails.userType
             });
             // 4 Return the detail of created user
 

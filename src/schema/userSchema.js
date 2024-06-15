@@ -42,17 +42,37 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, "Password should be provided"],
-        minlength: [6, "Password must be at least 8 characters"],
-    }
-
+        minlength: [8, "Password must be at least 8 characters"],
+    },
+    userType: {
+        type: String,
+        enum: ['admin', 'customer'],
+        default: 'customer'
+    },
+    products: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Product',
+        default: []
+    },
+    
 }, {
     timestamps: true,
 });
 
 userSchema.pre('save', async function () {
-    const plainPassword = this.password;
-    const hashPassword = await bcrypt.hash(plainPassword, parseInt(SALT_ROUND));
-    this.password = hashPassword;
+    try {
+        const plainPassword = this.password;
+        const hashPassword = await bcrypt.hash(plainPassword, parseInt(SALT_ROUND));
+        this.password = hashPassword;
+    }
+    catch (error) {
+        throw {
+            reason: error.message,
+            statusCode: 400,
+
+
+        };
+    }
 });
 
 const User = mongoose.model('User', userSchema);

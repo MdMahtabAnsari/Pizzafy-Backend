@@ -5,6 +5,8 @@ const userRouter = require('./routes/userRoute');
 const cartRouter = require('./routes/cartRoute');
 const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/authRouter');
+const { isLoggedIn} = require('./validation/authValidator');
+const productRouter = require('./routes/productRouter');
 const app = express();
 // Here we are configuring express to use body-parser.
 app.use(cookieParser());
@@ -14,7 +16,8 @@ app.use(express.text())
 
 app.use('/users',userRouter);
 app.use('/carts',cartRouter);
-app.use('/auth',authRouter)
+app.use('/auth',authRouter);
+app.use('/products',isLoggedIn,productRouter);
 
 app.listen(serverConfig.PORT, async () => {
     await connectDB()

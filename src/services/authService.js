@@ -42,7 +42,7 @@ class AuthService {
                     statusCode: 400
                 }
             }
-            const token = this.jwt.sign({ id: user._id, email: user.email }, this.JWT_SECRET, { expiresIn: this.JWT_EXPIRE });
+            const token = this.jwt.sign({ id: user._id, email: user.email,userType:user.userType }, this.JWT_SECRET, { expiresIn: this.JWT_EXPIRE });
             return token;
 
         }

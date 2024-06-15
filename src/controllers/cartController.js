@@ -2,4 +2,4 @@ const getCartById = () => {
     console.log('cart controller')
 }
 
-module.exports = { getCartById }
+module.exports =  getCartById 

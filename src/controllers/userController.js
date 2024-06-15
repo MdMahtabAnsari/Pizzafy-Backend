@@ -1,9 +1,8 @@
-const UserRepository = require("../respositories/userRepository")
 const UserService = require("../services/userService")
 
 const createUser = async (req, res) => {
     try {
-        const userService = new UserService(new UserRepository);
+        const userService = new UserService();
         // const userService = new UserService();
         const response = await userService.registerUser(req.body);
 

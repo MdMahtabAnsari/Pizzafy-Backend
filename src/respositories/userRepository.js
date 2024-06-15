@@ -9,7 +9,7 @@ class UserRepository {
         catch (error) {
             throw {
                 reason: error.message,
-                status: 400,
+                statusCode: error.statusCode||500,
                 
             }
         }
@@ -24,7 +24,20 @@ class UserRepository {
         catch (error) {
             throw {
                 reason: error.message,
-                status: 400,
+                statusCode: error.statusCode||500,
+                
+            }
+        }
+    }
+    async updateUser(params, userDetails) {
+        try {
+            const response = await User.findOneAndUpdate({ ...params }, { ...userDetails }, { new: true });
+            return response;
+        }
+        catch (error) {
+            throw {
+                reason: error.message,
+                statusCode: error.statusCode||500,
                 
             }
         }
