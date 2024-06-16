@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.text())
 
 app.use('/users',userRouter);
-app.use('/carts',cartRouter);
+app.use('/carts',isLoggedIn,cartRouter);
 app.use('/auth',authRouter);
 app.use('/products',isLoggedIn,productRouter);
 

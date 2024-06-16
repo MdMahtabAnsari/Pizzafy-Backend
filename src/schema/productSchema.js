@@ -32,6 +32,11 @@ const productSchema = new Schema({
         type: Boolean,
         default: true
     }
+    ,
+    quantity: {
+        type: Number,
+        default: 1
+    }
 }, { timestamps: true })
 
 const Product = mongoose.model('Product', productSchema);
